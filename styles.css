@@ -1,0 +1,330 @@
+/* Basis-Styles
+   ============
+   Diese Datei stellt ein schlankes, responsives Grundlayout bereit.
+   Du kannst sie vollständig anpassen oder durch deine eigenen Styles ersetzen.
+*/
+
+:root {
+  --color-bg: #0f172a;
+  --color-bg-alt: #020617;
+  --color-surface: #020617;
+  --color-surface-alt: #0b1120;
+  --color-primary: #38bdf8;
+  --color-primary-hover: #0ea5e9;
+  --color-text: #e5e7eb;
+  --color-text-muted: #9ca3af;
+  --color-border: #1f2937;
+  --radius: 0.75rem;
+  --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.6);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #1d293b 0, #020617 45%, #020617 100%);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Layout-Helfer
+   ------------- */
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.section-alt {
+  background: radial-gradient(circle at top left, #111827 0, #020617 55%);
+}
+
+.section-cta {
+  padding: 4.5rem 0 5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Typografie
+   ---------- */
+
+.eyebrow {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 2.6vw + 1.5rem, 3.1rem);
+}
+
+h2 {
+  font-size: clamp(1.65rem, 1.2vw + 1.2rem, 2.1rem);
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+.lead {
+  margin: 0 0 1.75rem;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+p {
+  margin: 0 0 1rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* Header & Hero
+   ------------- */
+
+.site-header {
+  padding: 1.5rem 0 3.5rem;
+  position: relative;
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 0, rgba(56, 189, 248, 0.12), transparent 55%),
+    radial-gradient(circle at 90% 10%, rgba(129, 140, 248, 0.18), transparent 55%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 3.25rem 1.75rem 3rem;
+  border-radius: 1.5rem;
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.98));
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-text {
+  max-width: 40rem;
+}
+
+.hero-text .btn {
+  margin-top: 0.5rem;
+}
+
+/* Cards, Quotes, CTA
+   ------------------ */
+
+.card {
+  padding: 1.4rem 1.4rem 1.35rem;
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, #020617, #020617);
+  border: 1px solid rgba(55, 65, 81, 0.7);
+}
+
+.quote {
+  padding: 1.75rem 1.75rem 1.5rem;
+  border-radius: var(--radius);
+  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.04), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: var(--color-text-muted);
+}
+
+.quote p {
+  margin: 0 0 0.75rem;
+  font-style: italic;
+}
+
+.quote footer {
+  font-size: 0.88rem;
+  color: var(--color-text);
+}
+
+.section-cta .container {
+  display: flex;
+  justify-content: center;
+}
+
+.cta-box {
+  width: 100%;
+  max-width: 640px;
+  padding: 2.25rem 2rem 2.1rem;
+  border-radius: 1.5rem;
+  background: radial-gradient(circle at top, #0b1120, #020617);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.cta-box p {
+  margin-bottom: 1.5rem;
+}
+
+.cta-form {
+  margin-top: 1.75rem;
+  text-align: left;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+input[type='email'],
+input[type='text'],
+input[type='tel'] {
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--color-border);
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--color-text);
+}
+
+input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Buttons
+   ------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.35rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  color: #0b1120;
+  box-shadow: 0 16px 35px rgba(56, 189, 248, 0.38);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-primary-hover), var(--color-primary));
+  transform: translateY(-1px);
+  box-shadow: 0 20px 45px rgba(56, 189, 248, 0.48);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+}
+
+/* Footer
+   ------ */
+
+.site-footer {
+  border-top: 1px solid rgba(31, 41, 55, 0.9);
+  padding: 1.25rem 0 1.5rem;
+  margin-top: 1rem;
+}
+
+.site-footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+/* Responsive Breakpoints
+   ---------------------- */
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 0;
+  }
+
+  .hero {
+    padding: 2.5rem 1.5rem 2.3rem;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding-inline: 2.5rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
