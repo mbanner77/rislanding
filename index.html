@@ -100,6 +100,30 @@
             color: var(--gray-800);
             line-height: 1.6;
             overflow-x: hidden;
+            animation: pageEntrance 0.6s ease-out;
+        }
+
+        @keyframes pageEntrance {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cursor Glow on dark sections */
+        .cursor-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(137, 197, 65, 0.08) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .cursor-glow.active {
+            opacity: 1;
         }
 
         /* Navigation */
@@ -366,15 +390,22 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--brand-green-light);
-            border: 1px solid var(--brand-green-light);
+            background: rgba(137, 197, 65, 0.1);
+            border: 1px solid rgba(137, 197, 65, 0.3);
             color: var(--brand-green);
             padding: 0.5rem 1.2rem;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            animation: fadeInDown 0.8s ease;
+            animation: fadeInDown 0.8s ease, badgeGlow 3s ease-in-out infinite;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        @keyframes badgeGlow {
+            0%, 100% { border-color: rgba(137, 197, 65, 0.3); box-shadow: 0 0 0 rgba(137, 197, 65, 0); }
+            50% { border-color: rgba(137, 197, 65, 0.6); box-shadow: 0 0 20px rgba(137, 197, 65, 0.1); }
         }
 
         .hero-badge .dot {
@@ -933,21 +964,37 @@
 
         .form-container {
             background: var(--gray-50);
-            border: 1px solid var(--gray-200);
             border-radius: 24px;
             padding: 2.5rem;
             position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box;
         }
 
         .form-container::before {
             content: '';
             position: absolute;
-            top: -1px;
-            left: 2rem;
-            right: 2rem;
-            height: 4px;
-            background: var(--gradient-2);
-            border-radius: 0 0 4px 4px;
+            inset: -2px;
+            border-radius: 26px;
+            background: linear-gradient(135deg, var(--brand-green), var(--primary), var(--brand-green), #b8e986);
+            background-size: 300% 300%;
+            animation: gradientBorder 4s ease infinite;
+            z-index: -1;
+        }
+
+        .form-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            background: var(--gray-50);
+            z-index: -1;
+        }
+
+        @keyframes gradientBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .form-title {
@@ -1448,6 +1495,7 @@
 
     <!-- Hero -->
     <section class="hero" id="hero">
+        <div class="cursor-glow" id="heroGlow"></div>
         <div class="hero-particles">
             <div class="particle"></div>
             <div class="particle"></div>
@@ -1595,6 +1643,7 @@
 
     <!-- Results Section -->
     <section class="results" id="ergebnis">
+        <div class="cursor-glow" id="resultsGlow"></div>
         <div class="results-inner">
             <div class="results-header fade-in">
                 <span class="section-label" style="background: var(--brand-green-light); color: var(--brand-green);">Das Ergebnis</span>
@@ -1721,6 +1770,7 @@
         <div class="footer-inner">
             <div class="footer-logo">RealCore Group <span>× RIS</span></div>
             <p>DSAG-Technologietage 2026 · Hamburg · Stand 38, Halle H</p>
+            <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--gray-500);">© <span id="copyrightYear"></span> RealCore Group. Alle Rechte vorbehalten.</p>
             <p><a href="mailto:techhub@realcore.de" style="color: var(--gray-300); text-decoration: none;">techhub@realcore.de</a> · <a href="tel:+4920148639980" style="color: var(--gray-300); text-decoration: none;">+49 201 486 399 80</a></p>
             <div class="footer-links">
                 <a href="https://www.realcore.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
@@ -1824,6 +1874,29 @@
                 ticking = true;
             }
         });
+
+        // Copyright Year
+        document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+
+        // Cursor Glow on dark sections
+        const heroSection = document.getElementById('hero');
+        const heroGlow = document.getElementById('heroGlow');
+        const resultsSection = document.getElementById('ergebnis');
+        const resultsGlow = document.getElementById('resultsGlow');
+
+        function handleGlow(section, glow, e) {
+            const rect = section.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            glow.style.left = x + 'px';
+            glow.style.top = y + 'px';
+            glow.classList.add('active');
+        }
+
+        heroSection.addEventListener('mousemove', (e) => handleGlow(heroSection, heroGlow, e));
+        heroSection.addEventListener('mouseleave', () => heroGlow.classList.remove('active'));
+        resultsSection.addEventListener('mousemove', (e) => handleGlow(resultsSection, resultsGlow, e));
+        resultsSection.addEventListener('mouseleave', () => resultsGlow.classList.remove('active'));
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
