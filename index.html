@@ -557,6 +557,53 @@
             line-height: 1.6;
         }
 
+        /* Books Section */
+        .books-section {
+            padding: 100px 2rem;
+            background: var(--gray-50);
+        }
+
+        .books-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .books-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .books-content h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .books-text {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        .books-image {
+            position: relative;
+w        }
+
+        .books-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            display: block;
+        }
+
         /* Form Section */
         .form-section {
             padding: 100px 2rem;
@@ -924,11 +971,20 @@
                 grid-template-columns: 1fr 1fr;
             }
 
+            .books-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .books-image {
+                order: -1;
+            }
+
             .form-container {
                 padding: 1.5rem;
             }
 
-            .problem, .solution, .results, .form-section {
+            .problem, .solution, .results, .books-section, .form-section {
                 padding: 60px 1.5rem;
             }
         }
@@ -974,7 +1030,7 @@
                     <div class="hero-meta-item">
                         <div class="icon">📍</div>
                         <div class="value">Stand 38</div>
-                        <div class="label">Halle [X]</div>
+                        <div class="label">Halle H</div>
                     </div>
                     <div class="hero-meta-item">
                         <div class="icon">📅</div>
@@ -1099,6 +1155,22 @@
         </div>
     </section>
 
+    <!-- Books Section -->
+    <section class="books-section" id="buecher">
+        <div class="books-inner">
+            <div class="books-content fade-in">
+                <span class="section-label">Unsere Expertise</span>
+                <h2>Von Experten für Experten</h2>
+                <p class="books-text">
+                    Unser Team hat eine Reihe von Fachbüchern für SAP Press veröffentlicht, die tausende SAP-Profis als Referenz nutzen. Diese Expertise fließt direkt in die Entwicklung von RIS ein.
+                </p>
+            </div>
+            <div class="books-image fade-in">
+                <img src="assets/Bücher_alle.png" alt="SAP Press Fachbücher von RealCore" />
+            </div>
+        </div>
+    </section>
+
     <!-- Form Section -->
     <section class="form-section" id="termin">
         <div class="form-inner">
@@ -1130,20 +1202,22 @@
                 </ul>
             </div>
             <div class="form-container fade-in" id="formContainer">
-                <h3 class="form-title">Gesprächstermin anfragen</h3>
+                <h3 class="form-title">Gesprächstermin buchen</h3>
                 <p class="form-subtitle">
-                    Schreiben Sie uns kurz, wann Sie Zeit haben. Wir melden uns innerhalb von 24 Stunden mit Ihrer Terminbestätigung.
+                    Wählen Sie einen freien Slot in unserem Messekalender. Sie erhalten direkt eine Bestätigung.
                 </p>
 
                 <a
                     class="btn-submit"
-                    href="mailto:techhub@realcore.de?subject=Terminanfrage%20DSAG%202026%20-%20RIS&body=Hallo%20RealCore-Team,%0A%0Aich%20möchte%20einen%20Gesprächstermin%20auf%20dem%20DSAG-Jahreskongress%202026%20vereinbaren.%0A%0AUnternehmen:%20%0ARolle/Position:%20%0AGewünschter%20Zeitraum:%20%0ABesondere%20Themen:%20%0A%0AViele%20Grüße,%0A"
+                    href="https://outlook.office.com/book/Messekalender2026@realcore.de/?ismsaljsauthenabled=true"
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
-                    Termin per E‑Mail anfragen →
+                    Termin im Kalender buchen →
                 </a>
 
                 <p class="form-note">
-                    📧 Ihr E‑Mail‑Programm öffnet sich mit einer vorbereiteten Nachricht an <strong>techhub@realcore.de</strong>.
+                    📅 Die Buchungsseite öffnet sich in einem neuen Tab. Bei Fragen: <strong>techhub@realcore.de</strong>.
                 </p>
             </div>
         </div>
@@ -1153,7 +1227,7 @@
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-logo">RealCore Group <span>× RIS</span></div>
-            <p>DSAG-Jahreskongress 2026 · Hamburg · Stand 38, Halle [X]</p>
+            <p>DSAG-Jahreskongress 2026 · Hamburg · Stand 38, Halle H</p>
             <p>📧 techhub@realcore.de · 📞 +49 (0) XXX XXXX XXX</p>
             <div class="footer-links">
                 <a href="#">Impressum</a>

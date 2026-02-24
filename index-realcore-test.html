@@ -1,0 +1,1286 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSAG 2026 – RIS Live erleben | RealCore Design Test</title>
+    <meta name="description" content="Erleben Sie RIS live auf dem DSAG-Jahreskongress 2026 in Hamburg. Sichern Sie sich jetzt Ihren persönlichen Gesprächstermin.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0F2B46;
+            --accent: #89C541;
+            --accent-hover: #6FA834;
+            --accent-light: rgba(137, 197, 65, 0.15);
+            --brand-green: #89C541;
+            --brand-green-light: rgba(137, 197, 65, 0.15);
+            --brand-green-dark: #6FA834;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gradient-1: linear-gradient(135deg, #0F2B46 0%, #1A3A5C 50%, #0F2B46 100%);
+            --gradient-2: linear-gradient(135deg, #89C541 0%, #6FA834 100%);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-800);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(20px);
+            padding: 0 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            box-shadow: 0 2px 20px rgba(15, 23, 42, 0.15);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            position: relative;
+        }
+
+        .nav-logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo-img {
+            height: 32px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-title {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--brand-green);
+            pointer-events: none;
+        }
+
+        .nav-cta {
+            background: var(--gradient-2);
+            color: var(--white);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(137, 197, 65, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-1);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 2rem 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(137, 197, 65, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(137, 197, 65, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--brand-green-light);
+            border: 1px solid var(--brand-green-light);
+            color: var(--brand-green);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--brand-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero h1 .highlight {
+            color: var(--brand-green);
+            position: relative;
+        }
+
+        .hero-sub {
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            color: var(--gray-300);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn-primary {
+            background: var(--gradient-2);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(137, 197, 65, 0.4);
+        }
+
+        .btn-secondary {
+            color: var(--gray-300);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            color: var(--white);
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+
+        .hero-meta-item {
+            text-align: center;
+        }
+
+        .hero-meta-item .icon {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-meta-item .label {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-meta-item .value {
+            font-size: 0.95rem;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 100px 2rem;
+            background: var(--white);
+        }
+
+        .problem-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--brand-green);
+            margin-bottom: 1rem;
+            background: var(--brand-green-light);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+        }
+
+        .problem h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .problem-text {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .pain-point {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .pain-point:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .pain-point .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .pain-point h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .pain-point p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 100px 2rem;
+            background: var(--gray-50);
+        }
+
+        .solution-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .solution-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .solution h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .solution-sub {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--gray-200);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-2);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--brand-green-light);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card .module {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--brand-green);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        /* Results Section */
+        .results {
+            padding: 100px 2rem;
+            background: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .results::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(137, 197, 65, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .results-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .results h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .results-sub {
+            color: var(--gray-300);
+            font-size: 1.1rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .result-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .result-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-4px);
+        }
+
+        .result-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-item h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-item p {
+            font-size: 0.9rem;
+            color: var(--gray-300);
+            line-height: 1.6;
+        }
+
+        /* Books Section */
+        .books-section {
+            padding: 100px 2rem;
+            background: var(--gray-50);
+        }
+
+        .books-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .books-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .books-content h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .books-text {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        .books-image {
+            position: relative;
+        }
+
+        .books-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            display: block;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 100px 2rem;
+            background: var(--white);
+        }
+
+        .form-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .form-content h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.25;
+        }
+
+        .form-content p {
+            font-size: 1.05rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .form-benefits {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-benefits li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--gray-700);
+        }
+
+        .form-benefits .check {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            background: var(--brand-green-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-green);
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-top: 1px;
+        }
+
+        .form-container {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 2rem;
+            right: 2rem;
+            height: 4px;
+            background: var(--gradient-2);
+            border-radius: 0 0 4px 4px;
+        }
+
+        .form-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .form-subtitle {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group label .required {
+            color: #EF4444;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--gray-800);
+            background: var(--white);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--brand-green);
+            box-shadow: 0 0 0 4px var(--brand-green-light);
+        }
+
+        .form-group input::placeholder {
+            color: var(--gray-300);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin: 1.5rem 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            margin-top: 2px;
+            accent-color: var(--brand-green);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-size: 0.82rem;
+            color: var(--gray-500);
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .checkbox-group label a {
+            color: var(--brand-green);
+            text-decoration: none;
+        }
+
+        .checkbox-group label a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--gradient-2);
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(137, 197, 65, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            margin-top: 1rem;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .success-message .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-message h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: var(--gray-300);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--brand-green);
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-300);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-green);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-inner {
+                height: 60px;
+            }
+
+            .hero {
+                padding: 100px 1.5rem 60px;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .pain-points {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .form-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .books-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .books-image {
+                order: -1;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .problem, .solution, .results, .books-section, .form-section {
+                padding: 60px 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <img src="assets/realcore-logo.png" alt="RealCore Logo" class="nav-logo-img">
+            </a>
+            <div class="nav-title">× RIS</div>
+            <a href="#termin" class="nav-cta">Termin sichern →</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    DSAG-Jahreskongress 2026 · Hamburg
+                </div>
+                <h1>Ihr CPI verdient<br>bessere <span class="highlight">Werkzeuge.</span></h1>
+                <p class="hero-sub">
+                    Wir haben mit <strong>RIS</strong> eine Lösung entwickelt, die SAP-CPI-Teams das zurückgibt, 
+                    was ihnen am meisten fehlt: Zeit, Übersicht und Kontrolle. Erleben Sie es live am Stand.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#termin" class="btn-primary">Gesprächstermin sichern →</a>
+                    <a href="#loesung" class="btn-secondary">Mehr erfahren ↓</a>
+                </div>
+                <div class="hero-meta">
+                    <div class="hero-meta-item">
+                        <div class="icon">📍</div>
+                        <div class="value">Stand 38</div>
+                        <div class="label">Halle H</div>
+                    </div>
+                    <div class="hero-meta-item">
+                        <div class="icon">📅</div>
+                        <div class="value">März 2026</div>
+                        <div class="label">Hamburg</div>
+                    </div>
+                    <div class="hero-meta-item">
+                        <div class="icon">⏱️</div>
+                        <div class="value">15 Min.</div>
+                        <div class="label">Live-Demo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="problem-inner">
+            <span class="section-label">Die Realität</span>
+            <h2>CPI-Alltag: Kennen Sie das?</h2>
+            <p class="problem-text">
+                SAP CPI ist mächtig – aber die tägliche Arbeit damit oft frustrierend. 
+                Zu viele Klicks, zu wenig Übersicht, zu viel Risiko bei Deployments. 
+                Und die Dokumentation? Ist meistens veraltet.
+            </p>
+            <div class="pain-points fade-in">
+                <div class="pain-point">
+                    <div class="icon">🔍</div>
+                    <h3>Klick-Marathon bei der Fehlersuche</h3>
+                    <p>Endloses Durchklicken der Standard-Oberfläche, bis die Ursache gefunden ist. Zeit, die Ihrem Team fehlt.</p>
+                </div>
+                <div class="pain-point">
+                    <div class="icon">📄</div>
+                    <h3>Dokumentation? Theoretisch ja.</h3>
+                    <p>IFlow-Dokumentation wird manuell gepflegt – wenn überhaupt. Spätestens nach dem dritten Change ist sie veraltet.</p>
+                </div>
+                <div class="pain-point">
+                    <div class="icon">⚠️</div>
+                    <h3>Deployments auf gut Glück</h3>
+                    <p>Ohne klaren Vergleich zwischen Systemen wird jedes Deployment zum Risiko. Abweichungen fallen erst in Produktion auf.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="loesung">
+        <div class="solution-inner">
+            <div class="solution-header">
+                <span class="section-label">Die Lösung</span>
+                <h2>RIS – Fünf Module, ein Ziel:<br>Ihr CPI unter Kontrolle.</h2>
+                <p class="solution-sub">
+                    Jedes Modul löst ein konkretes Problem. Zusammen machen sie Ihr Integrationsteam schneller, sicherer und effizienter.
+                </p>
+            </div>
+            <div class="features">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📊</div>
+                    <div class="module">Message Monitor</div>
+                    <h3>Schnellere Fehlersuche</h3>
+                    <p>Eine vertraute, PI/PO-ähnliche Sicht auf alle CPI-Messages. Kein Klick-Marathon mehr – Störungen analysieren Sie in Sekunden statt Minuten.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📝</div>
+                    <div class="module">Flow Documentation</div>
+                    <h3>Automatische Dokumentation</h3>
+                    <p>Die Dokumentation Ihrer IFlows wird automatisch erstellt und aktualisiert. Kein manuelles Nachpflegen, immer auf dem neuesten Stand.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔀</div>
+                    <div class="module">Flow Compare</div>
+                    <h3>Sichere Deployments</h3>
+                    <p>Sehen Sie auf einen Blick die Unterschiede zwischen Systemen. Abweichungen erkennen, bevor sie zu produktiven Problemen werden.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔎</div>
+                    <div class="module">Query Browser</div>
+                    <h3>Gezielte Suche</h3>
+                    <p>SQL-ähnliche Suche über alle Artefakte und Inhalte. Finden Sie die gesuchten Informationen in Sekunden – nicht in Stunden.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📋</div>
+                    <div class="module">Syslog-Viewer</div>
+                    <h3>Zentrale Log-Übersicht</h3>
+                    <p>Alle System-Logs konsolidiert in einer Ansicht. Schnellere Ursachenanalyse, bessere Übersicht über Systemzustände.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results" id="ergebnis">
+        <div class="results-inner">
+            <div class="results-header fade-in">
+                <span class="section-label" style="background: var(--brand-green-light); color: var(--brand-green);">Das Ergebnis</span>
+                <h2>Weniger Troubleshooting.<br>Mehr Innovation.</h2>
+                <p class="results-sub">Was Ihr Team mit RIS konkret gewinnt:</p>
+            </div>
+            <div class="results-grid fade-in">
+                <div class="result-item">
+                    <div class="icon">⚡</div>
+                    <h3>Kürzere Wiederherstellungszeiten</h3>
+                    <p>Incidents schneller identifizieren und beheben – bevor der Fachbereich anruft.</p>
+                </div>
+                <div class="result-item">
+                    <div class="icon">🛡️</div>
+                    <h3>Weniger Fehl-Deployments</h3>
+                    <p>Systemunterschiede frühzeitig erkennen und produktive Fehler vermeiden.</p>
+                </div>
+                <div class="result-item">
+                    <div class="icon">📐</div>
+                    <h3>Bessere Governance</h3>
+                    <p>Aktuelle Dokumentation und zentrale Übersicht schaffen Transparenz und Compliance.</p>
+                </div>
+                <div class="result-item">
+                    <div class="icon">🚀</div>
+                    <h3>Fokus auf Weiterentwicklung</h3>
+                    <p>Ihr Team investiert Zeit in Innovation statt in zeitaufwendige Fehlersuche.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section class="books-section" id="buecher">
+        <div class="books-inner">
+            <div class="books-content fade-in">
+                <span class="section-label">Unsere Expertise</span>
+                <h2>Von Experten für Experten</h2>
+                <p class="books-text">
+                    Unser Team hat eine Reihe von Fachbüchern für SAP Press veröffentlicht, die tausende SAP-Profis als Referenz nutzen. Diese Expertise fließt direkt in die Entwicklung von RIS ein.
+                </p>
+            </div>
+            <div class="books-image fade-in">
+                <img src="assets/Bücher_alle.png" alt="SAP Press Fachbücher von RealCore" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="termin">
+        <div class="form-inner">
+            <div class="form-content fade-in">
+                <span class="section-label">Jetzt Termin sichern</span>
+                <h2>15 Minuten, die sich lohnen. Versprochen.</h2>
+                <p>
+                    Erleben Sie RIS live an unserem Stand auf dem DSAG-Jahreskongress 2026 in Hamburg. 
+                    Kein Folienvortrag – wir zeigen Ihnen direkt, wie RIS Ihren CPI-Alltag verändert. 
+                    Reservieren Sie jetzt Ihren persönlichen Gesprächstermin.
+                </p>
+                <ul class="form-benefits">
+                    <li>
+                        <span class="check">✓</span>
+                        <span><strong>Live-Demo</strong> – RIS im Einsatz erleben, nicht nur darüber lesen</span>
+                    </li>
+                    <li>
+                        <span class="check">✓</span>
+                        <span><strong>Persönliches Gespräch</strong> – Ihre Fragen, Ihre Herausforderungen, Ihre Lösung</span>
+                    </li>
+                    <li>
+                        <span class="check">✓</span>
+                        <span><strong>Unverbindlich</strong> – Kein Vertrag, keine Verpflichtung, nur Mehrwert</span>
+                    </li>
+                    <li>
+                        <span class="check">✓</span>
+                        <span><strong>Begrenzte Slots</strong> – Feste Termine garantieren Ihnen unsere volle Aufmerksamkeit</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-container fade-in" id="formContainer">
+                <h3 class="form-title">Gesprächstermin buchen</h3>
+                <p class="form-subtitle">
+                    Klicken Sie auf den Button – die Buchung erfolgt direkt in unserem Messekalender in einem neuen Tab.
+                </p>
+                <a
+                    class="btn-submit"
+                    href="https://outlook.office.com/book/Messekalender2026@realcore.de/?ismsaljsauthenabled=true"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Termin jetzt buchen →
+                </a>
+                <p class="form-note">
+                    Die Buchungsseite öffnet sich in einem neuen Tab. Bei Fragen: <strong>techhub@realcore.de</strong>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">RealCore Group <span>× RIS</span></div>
+            <p>DSAG-Jahreskongress 2026 · Hamburg · Stand 38, Halle H</p>
+            <p>📧 techhub@realcore.de · 📞 +49 (0) XXX XXXX XXX</p>
+            <div class="footer-links">
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+                <a href="#">Website</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Fade-in on Scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
