@@ -91,9 +91,35 @@
             --shadow-xl: 0 20px 60px rgba(0,0,0,0.2);
         }
 
+        /* Custom Selection */
+        ::selection {
+            background: rgba(137, 197, 65, 0.25);
+            color: inherit;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-50);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--brand-green), var(--primary));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-green);
+        }
+
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 80px;
+            scrollbar-color: var(--brand-green) var(--gray-50);
+            scrollbar-width: thin;
         }
 
         body {
@@ -102,6 +128,17 @@
             line-height: 1.6;
             overflow-x: hidden;
             animation: pageEntrance 0.6s ease-out;
+        }
+
+        /* Grain Texture Overlay */
+        .grain::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
         }
 
         @keyframes pageEntrance {
@@ -584,6 +621,7 @@
             line-height: 1.15;
             margin-bottom: 1.5rem;
             animation: fadeInUp 0.8s ease 0.2s both;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.15);
         }
 
         .hero h1 .highlight {
@@ -978,7 +1016,7 @@
             background: rgba(137, 197, 65, 0.08);
             border-color: rgba(137, 197, 65, 0.3);
             transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(137, 197, 65, 0.1);
+            box-shadow: 0 8px 30px rgba(137, 197, 65, 0.1), inset 0 0 20px rgba(137, 197, 65, 0.03);
         }
 
         .result-item .icon {
@@ -1271,7 +1309,8 @@
 
         .btn-submit {
             width: 100%;
-            background: var(--gradient-2);
+            background: linear-gradient(90deg, var(--brand-green) 0%, #6ab82e 50%, var(--brand-green) 100%);
+            background-size: 200% auto;
             color: var(--white);
             padding: 1rem;
             border: none;
@@ -1280,16 +1319,36 @@
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-submit:hover::after {
+            transform: translateX(100%);
         }
 
         .btn-submit:hover {
+            background-position: right center;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(137, 197, 65, 0.4);
+            box-shadow: 0 8px 25px rgba(137, 197, 65, 0.4), 0 0 40px rgba(137, 197, 65, 0.15);
         }
 
         .btn-submit:active {
@@ -1686,7 +1745,7 @@
     </div>
 
     <!-- Hero -->
-    <section class="hero" id="hero">
+    <section class="hero grain" id="hero">
         <div class="cursor-glow" id="heroGlow"></div>
         <div class="hero-particles">
             <div class="particle"></div>
@@ -1838,7 +1897,7 @@
     </div>
 
     <!-- Results Section -->
-    <section class="results" id="ergebnis">
+    <section class="results grain" id="ergebnis">
         <div class="cursor-glow" id="resultsGlow"></div>
         <div class="results-inner">
             <div class="results-header fade-in">
@@ -1962,7 +2021,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer grain">
         <div class="footer-inner">
             <div class="footer-logo">RealCore Group <span>× RIS</span></div>
             <p>DSAG-Technologietage 2026 · Hamburg · Stand 38, Halle H</p>
