@@ -437,15 +437,52 @@
             border-radius: 4px;
         }
 
+        /* Announcement Bar */
+        .announcement-bar {
+            background: linear-gradient(90deg, var(--brand-green), #6ab82e, var(--brand-green));
+            background-size: 200% auto;
+            animation: slideGradient 4s linear infinite;
+            color: var(--white);
+            text-align: center;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            position: relative;
+            z-index: 1001;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .announcement-bar a {
+            color: var(--white);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        @keyframes slideGradient {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
         /* Hero Section */
         .hero {
             background: var(--gradient-1);
+            background-size: 400% 400%;
+            animation: heroGradient 15s ease infinite;
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
-            padding: 120px 2rem 80px;
+            padding: 150px 2rem 80px;
+        }
+
+        @keyframes heroGradient {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 25%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 0% 75%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero::before {
@@ -925,6 +962,8 @@
             transform: translateY(-6px);
             box-shadow: 0 10px 40px rgba(137, 197, 65, 0.12), var(--shadow-lg);
             border-color: rgba(137, 197, 65, 0.2);
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(137, 197, 65, 0.03));
+            backdrop-filter: blur(4px);
         }
 
         .feature-icon {
@@ -1713,6 +1752,11 @@
 </head>
 <body>
 
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        🎯 Begrenzte Demo-Slots verfügbar – <a href="#termin">Jetzt Termin sichern</a>
+    </div>
+
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="scroll-progress" id="scrollProgress"></div>
@@ -2128,6 +2172,34 @@
                 });
                 ticking = true;
             }
+        });
+
+        // Hide announcement bar on scroll
+        const announcementBar = document.querySelector('.announcement-bar');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                announcementBar.style.transform = 'translateY(-100%)';
+                announcementBar.style.opacity = '0';
+                nav.style.top = '0';
+            } else {
+                announcementBar.style.transform = 'translateY(0)';
+                announcementBar.style.opacity = '1';
+            }
+        });
+
+        // Magnetic CTA Button
+        const magneticBtns = document.querySelectorAll('.btn-primary, .nav-cta');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
         });
 
         // Hamburger Menu
