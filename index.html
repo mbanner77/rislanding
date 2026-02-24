@@ -926,14 +926,56 @@
             transform: translateY(0);
         }
 
-        /* Responsive */
+        /* Responsive – Tablet (max 1024px) */
+        @media (max-width: 1024px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .books-inner {
+                gap: 2.5rem;
+            }
+
+            .form-inner {
+                gap: 2.5rem;
+            }
+
+            .problem, .solution, .results, .books-section, .form-section {
+                padding: 80px 1.5rem;
+            }
+        }
+
+        /* Responsive – Smartphone (max 768px) */
         @media (max-width: 768px) {
             .nav-inner {
                 height: 60px;
             }
 
+            .nav-title {
+                display: none;
+            }
+
+            .nav-cta {
+                padding: 0.55rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
             .hero {
-                padding: 100px 1.5rem 60px;
+                padding: 90px 1.25rem 50px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.7rem, 6vw, 2.4rem);
+            }
+
+            .hero-sub {
+                font-size: 1rem;
+                margin-bottom: 2rem;
             }
 
             .hero-meta {
@@ -949,6 +991,13 @@
             .btn-primary {
                 width: 100%;
                 justify-content: center;
+                padding: 0.9rem 2rem;
+                font-size: 1rem;
+                min-height: 48px;
+            }
+
+            .btn-secondary {
+                min-height: 44px;
             }
 
             .pain-points {
@@ -957,6 +1006,10 @@
 
             .features {
                 grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 1.75rem;
             }
 
             .form-inner {
@@ -985,14 +1038,73 @@
                 padding: 1.5rem;
             }
 
+            .btn-submit {
+                min-height: 48px;
+                font-size: 1rem;
+            }
+
             .problem, .solution, .results, .books-section, .form-section {
-                padding: 60px 1.5rem;
+                padding: 60px 1.25rem;
+            }
+
+            .problem h2, .solution h2, .results h2, .books-content h2, .form-content h2 {
+                font-size: clamp(1.5rem, 5vw, 2rem);
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 1rem 1.5rem;
             }
         }
 
+        /* Responsive – Kleines Smartphone (max 480px) */
         @media (max-width: 480px) {
+            .hero {
+                padding: 80px 1rem 40px;
+            }
+
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-sub {
+                font-size: 0.92rem;
+            }
+
             .results-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .result-item {
+                padding: 1.5rem;
+            }
+
+            .pain-point {
+                padding: 1.5rem;
+            }
+
+            .form-container {
+                padding: 1.25rem;
+                border-radius: 16px;
+            }
+
+            .section-label {
+                font-size: 0.7rem;
+            }
+
+            .footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
             }
         }
 
@@ -1228,7 +1340,7 @@
         <div class="footer-inner">
             <div class="footer-logo">RealCore Group <span>× RIS</span></div>
             <p>DSAG-Jahreskongress 2026 · Hamburg · Stand 38, Halle H</p>
-            <p>📧 techhub@realcore.de · 📞 +49 (0) XXX XXXX XXX</p>
+            <p>📧 techhub@realcore.de · 📞 +49 201 486 399 80</p>
             <div class="footer-links">
                 <a href="#">Impressum</a>
                 <a href="#">Datenschutz</a>
