@@ -92,6 +92,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
@@ -108,14 +109,18 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             padding: 0 2rem;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid transparent;
         }
 
         .nav.scrolled {
-            box-shadow: 0 2px 20px rgba(15, 23, 42, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+            box-shadow: 0 4px 30px rgba(15, 23, 42, 0.08);
         }
 
         .nav-inner {
@@ -132,6 +137,11 @@
             text-decoration: none;
             display: flex;
             align-items: center;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-logo:hover {
+            opacity: 0.8;
         }
 
         .nav-logo-img {
@@ -197,12 +207,90 @@
             content: '';
             position: absolute;
             bottom: -30%;
-            left: -10%;
+            left: -15%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(137, 197, 65, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(137, 197, 65, 0.06) 0%, transparent 70%);
             border-radius: 50%;
         }
+
+        /* Wave Dividers */
+        .wave-divider {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin-top: -1px;
+            margin-bottom: -1px;
+            line-height: 0;
+            position: relative;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        .wave-divider svg {
+            display: block;
+            width: 100%;
+            height: 120px;
+        }
+
+        .wave-divider .wave-back {
+            opacity: 0.3;
+        }
+
+        @media (max-width: 768px) {
+            .wave-divider svg {
+                height: 70px;
+            }
+        }
+
+        /* Floating Particles */
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(137, 197, 65, 0.12);
+            animation: float linear infinite;
+        }
+
+        .particle:nth-child(1) { width: 6px; height: 6px; left: 10%; top: 20%; animation-duration: 18s; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 4px; height: 4px; left: 25%; top: 60%; animation-duration: 22s; animation-delay: -3s; }
+        .particle:nth-child(3) { width: 8px; height: 8px; left: 50%; top: 30%; animation-duration: 16s; animation-delay: -6s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; left: 70%; top: 70%; animation-duration: 20s; animation-delay: -9s; }
+        .particle:nth-child(5) { width: 3px; height: 3px; left: 85%; top: 40%; animation-duration: 24s; animation-delay: -12s; }
+        .particle:nth-child(6) { width: 7px; height: 7px; left: 40%; top: 80%; animation-duration: 19s; animation-delay: -4s; }
+        .particle:nth-child(7) { width: 4px; height: 4px; left: 60%; top: 15%; animation-duration: 21s; animation-delay: -7s; }
+        .particle:nth-child(8) { width: 6px; height: 6px; left: 90%; top: 55%; animation-duration: 17s; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(30px); opacity: 0; }
+        }
+
+        /* Staggered card animations */
+        .fade-in-stagger {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in-stagger.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-stagger:nth-child(1) { transition-delay: 0s; }
+        .fade-in-stagger:nth-child(2) { transition-delay: 0.12s; }
+        .fade-in-stagger:nth-child(3) { transition-delay: 0.24s; }
+        .fade-in-stagger:nth-child(4) { transition-delay: 0.36s; }
+        .fade-in-stagger:nth-child(5) { transition-delay: 0.48s; }
 
         .hero-grid {
             display: grid;
@@ -255,6 +343,18 @@
         .hero h1 .highlight {
             color: var(--brand-green);
             position: relative;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            right: -4px;
+            bottom: 2px;
+            height: 6px;
+            background: rgba(137, 197, 65, 0.25);
+            border-radius: 3px;
+            z-index: -1;
         }
 
         .hero-sub {
@@ -328,7 +428,12 @@
 
         .hero-meta-item .icon {
             font-size: 1.3rem;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--brand-green);
+        }
+
+        .hero-meta-item .icon svg {
+            stroke: var(--brand-green);
         }
 
         .hero-meta-item .label {
@@ -346,8 +451,9 @@
 
         /* Problem Section */
         .problem {
-            padding: 100px 2rem;
+            padding: 80px 2rem 100px;
             background: var(--white);
+            position: relative;
         }
 
         .problem-inner {
@@ -408,7 +514,13 @@
         }
 
         .pain-point .icon {
-            font-size: 2rem;
+            width: 48px;
+            height: 48px;
+            background: var(--brand-green-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 1rem;
         }
 
@@ -490,8 +602,8 @@
 
         .feature-card:hover {
             transform: translateY(-6px);
-            box-shadow: var(--shadow-lg);
-            border-color: transparent;
+            box-shadow: 0 10px 40px rgba(137, 197, 65, 0.12), var(--shadow-lg);
+            border-color: rgba(137, 197, 65, 0.2);
         }
 
         .feature-icon {
@@ -533,18 +645,6 @@
             padding: 100px 2rem;
             background: var(--primary);
             position: relative;
-            overflow: hidden;
-        }
-
-        .results::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(137, 197, 65, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
         }
 
         .results-inner {
@@ -587,13 +687,21 @@
         }
 
         .result-item:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(137, 197, 65, 0.08);
+            border-color: rgba(137, 197, 65, 0.3);
             transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(137, 197, 65, 0.1);
         }
 
         .result-item .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            width: 56px;
+            height: 56px;
+            background: rgba(137, 197, 65, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
         }
 
         .result-item h3 {
@@ -657,6 +765,12 @@
             border-radius: 16px;
             box-shadow: var(--shadow-md);
             display: block;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .books-image img:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-lg);
         }
 
         /* Form Section */
@@ -705,18 +819,27 @@
         }
 
         .form-benefits .check {
-            width: 24px;
-            height: 24px;
-            min-width: 24px;
-            background: var(--brand-green-light);
+            width: 26px;
+            height: 26px;
+            min-width: 26px;
+            background: var(--brand-green);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--brand-green);
+            color: var(--white);
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             margin-top: 1px;
+        }
+
+        .form-benefits li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .form-benefits li:last-child {
+            border-bottom: none;
         }
 
         .form-container {
@@ -910,8 +1033,9 @@
         .footer {
             background: var(--primary);
             color: var(--gray-300);
-            padding: 3rem 2rem;
+            padding: 4rem 2rem 3rem;
             text-align: center;
+            position: relative;
         }
 
         .footer-inner {
@@ -953,6 +1077,10 @@
             color: var(--brand-green);
         }
 
+        .footer a:hover {
+            color: var(--brand-green);
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -979,7 +1107,7 @@
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease;
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .fade-in.visible {
@@ -987,31 +1115,6 @@
             transform: translateY(0);
         }
 
-        /* Section Dividers – weiche Übergänge */
-        .section-divider {
-            height: 80px;
-            background: linear-gradient(to bottom, var(--white), var(--gray-50));
-        }
-
-        .section-divider-dark {
-            height: 80px;
-            background: linear-gradient(to bottom, var(--gray-50), var(--primary));
-        }
-
-        .section-divider-dark-to-light {
-            height: 80px;
-            background: linear-gradient(to bottom, var(--primary), var(--gray-50));
-        }
-
-        .section-divider-light-to-white {
-            height: 80px;
-            background: linear-gradient(to bottom, var(--gray-50), var(--white));
-        }
-
-        .section-divider-white-to-dark {
-            height: 80px;
-            background: linear-gradient(to bottom, var(--white), var(--primary));
-        }
 
         /* Scroll to Top Button */
         .scroll-top {
@@ -1050,15 +1153,6 @@
             color: var(--white);
         }
 
-        /* Page Load Animation */
-        body {
-            opacity: 0;
-            animation: pageLoad 0.6s ease 0.1s forwards;
-        }
-
-        @keyframes pageLoad {
-            to { opacity: 1; }
-        }
 
         /* Responsive – Tablet (max 1024px) */
         @media (max-width: 1024px) {
@@ -1259,6 +1353,16 @@
 
     <!-- Hero -->
     <section class="hero" id="hero">
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
         <div class="hero-grid">
             <div class="hero-content">
                 <div class="hero-badge">
@@ -1295,7 +1399,12 @@
         </div>
     </section>
 
-    <div class="section-divider" style="background: linear-gradient(to bottom, var(--primary), var(--white));"></div>
+    <div class="wave-divider" style="background: var(--primary);">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-back" d="M0,10 C280,100 800,0 1440,70 L1440,120 L0,120 Z" fill="var(--white)"/>
+            <path d="M0,30 C360,110 1080,10 1440,80 L1440,120 L0,120 Z" fill="var(--white)"/>
+        </svg>
+    </div>
 
     <!-- Problem Section -->
     <section class="problem" id="problem">
@@ -1307,18 +1416,18 @@
                 Zu viele Klicks, zu wenig Übersicht, zu viel Risiko bei Deployments. 
                 Und die Dokumentation? Ist meistens veraltet.
             </p>
-            <div class="pain-points fade-in">
-                <div class="pain-point">
+            <div class="pain-points">
+                <div class="pain-point fade-in-stagger">
                     <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg></div>
                     <h3>Klick-Marathon bei der Fehlersuche</h3>
                     <p>Endloses Durchklicken der Standard-Oberfläche, bis die Ursache gefunden ist. Zeit, die Ihrem Team fehlt.</p>
                 </div>
-                <div class="pain-point">
+                <div class="pain-point fade-in-stagger">
                     <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><line x1="10" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="12" x2="8" y1="9" y2="9"/></svg></div>
                     <h3>Dokumentation? Theoretisch ja.</h3>
                     <p>IFlow-Dokumentation wird manuell gepflegt – wenn überhaupt. Spätestens nach dem dritten Change ist sie veraltet.</p>
                 </div>
-                <div class="pain-point">
+                <div class="pain-point fade-in-stagger">
                     <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--brand-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg></div>
                     <h3>Deployments auf gut Glück</h3>
                     <p>Ohne klaren Vergleich zwischen Systemen wird jedes Deployment zum Risiko. Abweichungen fallen erst in Produktion auf.</p>
@@ -1327,7 +1436,12 @@
         </div>
     </section>
 
-    <div class="section-divider"></div>
+    <div class="wave-divider" style="background: var(--white);">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-back" d="M0,50 C400,120 880,0 1440,60 L1440,120 L0,120 Z" fill="var(--gray-50)"/>
+            <path d="M0,60 C480,120 960,20 1440,70 L1440,120 L0,120 Z" fill="var(--gray-50)"/>
+        </svg>
+    </div>
 
     <!-- Solution Section -->
     <section class="solution" id="loesung">
@@ -1340,31 +1454,31 @@
                 </p>
             </div>
             <div class="features">
-                <div class="feature-card fade-in">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg></div>
                     <div class="module">Message Monitor</div>
                     <h3>Schnellere Fehlersuche</h3>
                     <p>Eine vertraute, PI/PO-ähnliche Sicht auf alle CPI-Messages. Kein Klick-Marathon mehr – Störungen analysieren Sie in Sekunden statt Minuten.</p>
                 </div>
-                <div class="feature-card fade-in">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
                     <div class="module">Flow Documentation</div>
                     <h3>Automatische Dokumentation</h3>
                     <p>Die Dokumentation Ihrer IFlows wird automatisch erstellt und aktualisiert. Kein manuelles Nachpflegen, immer auf dem neuesten Stand.</p>
                 </div>
-                <div class="feature-card fade-in">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/><path d="m15 9 6-6"/></svg></div>
                     <div class="module">Flow Compare</div>
                     <h3>Sichere Deployments</h3>
                     <p>Sehen Sie auf einen Blick die Unterschiede zwischen Systemen. Abweichungen erkennen, bevor sie zu produktiven Problemen werden.</p>
                 </div>
-                <div class="feature-card fade-in">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
                     <div class="module">Query Browser</div>
                     <h3>Gezielte Suche</h3>
                     <p>SQL-ähnliche Suche über alle Artefakte und Inhalte. Finden Sie die gesuchten Informationen in Sekunden – nicht in Stunden.</p>
                 </div>
-                <div class="feature-card fade-in">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg></div>
                     <div class="module">Syslog-Viewer</div>
                     <h3>Zentrale Log-Übersicht</h3>
@@ -1374,7 +1488,12 @@
         </div>
     </section>
 
-    <div class="section-divider-dark"></div>
+    <div class="wave-divider" style="background: var(--gray-50);">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-back" d="M0,30 C240,100 640,0 1000,70 C1200,90 1360,50 1440,40 L1440,120 L0,120 Z" fill="var(--primary)"/>
+            <path d="M0,50 C320,110 720,20 1080,80 C1260,100 1380,60 1440,50 L1440,120 L0,120 Z" fill="var(--primary)"/>
+        </svg>
+    </div>
 
     <!-- Results Section -->
     <section class="results" id="ergebnis">
@@ -1409,7 +1528,12 @@
         </div>
     </section>
 
-    <div class="section-divider-dark-to-light"></div>
+    <div class="wave-divider" style="background: var(--primary);">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-back" d="M0,70 C200,10 660,100 1020,30 C1260,0 1380,40 1440,50 L1440,120 L0,120 Z" fill="var(--gray-50)"/>
+            <path d="M0,80 C240,20 720,100 1080,40 C1300,20 1400,50 1440,60 L1440,120 L0,120 Z" fill="var(--gray-50)"/>
+        </svg>
+    </div>
 
     <!-- Books Section -->
     <section class="books-section" id="buecher">
@@ -1427,7 +1551,12 @@
         </div>
     </section>
 
-    <div class="section-divider-light-to-white"></div>
+    <div class="wave-divider" style="background: var(--gray-50);">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-back" d="M0,40 C320,100 680,0 1020,70 C1220,100 1360,60 1440,30 L1440,120 L0,120 Z" fill="var(--white)"/>
+            <path d="M0,50 C360,100 720,30 1080,80 C1260,100 1380,70 1440,40 L1440,120 L0,120 Z" fill="var(--white)"/>
+        </svg>
+    </div>
 
     <!-- Form Section -->
     <section class="form-section" id="termin">
@@ -1479,10 +1608,12 @@
         </div>
     </section>
 
-    <!-- Scroll to Top -->
-    <button class="scroll-top" id="scrollTop" aria-label="Nach oben scrollen">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-    </button>
+    <div class="wave-divider" style="background: var(--white);">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-back" d="M0,50 C400,110 900,10 1440,60 L1440,120 L0,120 Z" fill="var(--primary)"/>
+            <path d="M0,60 C480,120 960,30 1440,80 L1440,120 L0,120 Z" fill="var(--primary)"/>
+        </svg>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -1498,6 +1629,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" aria-label="Nach oben scrollen">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
 
     <script>
         // Navbar Scroll Effect + Scroll-to-Top visibility
@@ -1522,10 +1658,10 @@
         });
 
         // Fade-in on Scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeElements = document.querySelectorAll('.fade-in, .fade-in-stagger');
         const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.1,
+            rootMargin: '0px 0px -60px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
