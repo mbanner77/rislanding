@@ -123,6 +123,18 @@
             box-shadow: 0 4px 30px rgba(15, 23, 42, 0.08);
         }
 
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-2);
+            width: 0%;
+            transition: width 0.1s linear;
+            z-index: 10;
+        }
+
         .nav-inner {
             max-width: 1200px;
             margin: 0 auto;
@@ -150,17 +162,44 @@
             display: block;
         }
 
-        .nav-title {
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brand-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
             color: var(--brand-green);
-            pointer-events: none;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--brand-green);
+            font-weight: 600;
         }
 
         .nav-cta {
@@ -361,7 +400,12 @@
         }
 
         .hero h1 .highlight {
-            color: var(--brand-green);
+            background: linear-gradient(90deg, var(--brand-green) 0%, #b8e986 50%, var(--brand-green) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
             position: relative;
         }
 
@@ -375,6 +419,11 @@
             background: rgba(137, 197, 65, 0.25);
             border-radius: 3px;
             z-index: -1;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
         }
 
         .hero-sub {
@@ -414,6 +463,15 @@
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(137, 197, 65, 0.4);
+        }
+
+        .hero .btn-primary {
+            animation: fadeInUp 0.8s ease 0.6s both, ctaPulse 3s ease-in-out 2s infinite;
+        }
+
+        @keyframes ctaPulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(137, 197, 65, 0.2); }
+            50% { box-shadow: 0 4px 30px rgba(137, 197, 65, 0.5), 0 0 60px rgba(137, 197, 65, 0.15); }
         }
 
         .btn-secondary {
@@ -483,7 +541,9 @@
         }
 
         .section-label {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -493,6 +553,15 @@
             background: var(--brand-green-light);
             padding: 0.4rem 1rem;
             border-radius: 50px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--brand-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
         .problem h2 {
@@ -789,8 +858,8 @@
         }
 
         .books-image img:hover {
-            transform: scale(1.02);
-            box-shadow: var(--shadow-lg);
+            transform: perspective(800px) rotateY(-4deg) rotateX(2deg) scale(1.03);
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.15), -5px -5px 20px rgba(137, 197, 65, 0.08);
         }
 
         /* Form Section */
@@ -1203,7 +1272,7 @@
                 height: 60px;
             }
 
-            .nav-title {
+            .nav-links {
                 display: none;
             }
 
@@ -1362,11 +1431,17 @@
 
     <!-- Navigation -->
     <nav class="nav" id="nav">
+        <div class="scroll-progress" id="scrollProgress"></div>
         <div class="nav-inner">
             <a href="#hero" class="nav-logo">
                 <img src="assets/realcore-logo.png" alt="RealCore Logo" class="nav-logo-img">
             </a>
-            <div class="nav-title">× RIS</div>
+            <div class="nav-links" id="navLinks">
+                <a href="#problem">Problem</a>
+                <a href="#loesung">Lösung</a>
+                <a href="#ergebnis">Ergebnis</a>
+                <a href="#buecher">Expertise</a>
+            </div>
             <a href="#termin" class="nav-cta">Termin sichern →</a>
         </div>
     </nav>
@@ -1662,20 +1737,45 @@
     </button>
 
     <script>
-        // Navbar Scroll Effect + Scroll-to-Top visibility
+        // Navbar Scroll Effect + Scroll-to-Top + Progress Bar + Active Nav Links
         const nav = document.getElementById('nav');
         const scrollTopBtn = document.getElementById('scrollTop');
+        const scrollProgress = document.getElementById('scrollProgress');
+        const navLinksEl = document.querySelectorAll('#navLinks a');
+        const sections = document.querySelectorAll('section[id]');
+
         window.addEventListener('scroll', () => {
+            // Nav shadow
             if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
+            // Scroll-to-top
             if (window.scrollY > 400) {
                 scrollTopBtn.classList.add('visible');
             } else {
                 scrollTopBtn.classList.remove('visible');
             }
+            // Progress bar
+            const docH = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.scrollY / docH) * 100;
+            scrollProgress.style.width = progress + '%';
+
+            // Active nav link
+            let current = '';
+            sections.forEach(section => {
+                const top = section.offsetTop - 120;
+                if (window.scrollY >= top) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinksEl.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
         });
 
         // Scroll to Top
