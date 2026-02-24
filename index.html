@@ -214,7 +214,7 @@
             border-radius: 50%;
         }
 
-        /* Wave Dividers */
+        /* Wave Dividers – 3-Layer Animated */
         .wave-divider {
             display: block;
             width: 100%;
@@ -230,16 +230,36 @@
         .wave-divider svg {
             display: block;
             width: 100%;
-            height: 120px;
+            height: 150px;
         }
 
-        .wave-divider .wave-back {
-            opacity: 0.3;
+        .wave-divider .wave-layer-1 {
+            opacity: 0.15;
+            animation: waveShift1 8s ease-in-out infinite alternate;
+        }
+
+        .wave-divider .wave-layer-2 {
+            opacity: 0.35;
+            animation: waveShift2 6s ease-in-out infinite alternate;
+        }
+
+        .wave-divider .wave-layer-3 {
+            opacity: 1;
+        }
+
+        @keyframes waveShift1 {
+            0% { transform: translateX(-15px); }
+            100% { transform: translateX(15px); }
+        }
+
+        @keyframes waveShift2 {
+            0% { transform: translateX(10px); }
+            100% { transform: translateX(-10px); }
         }
 
         @media (max-width: 768px) {
             .wave-divider svg {
-                height: 70px;
+                height: 80px;
             }
         }
 
@@ -1400,9 +1420,10 @@
     </section>
 
     <div class="wave-divider" style="background: var(--primary);">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path class="wave-back" d="M0,10 C280,100 800,0 1440,70 L1440,120 L0,120 Z" fill="var(--white)"/>
-            <path d="M0,30 C360,110 1080,10 1440,80 L1440,120 L0,120 Z" fill="var(--white)"/>
+        <svg viewBox="0 0 1440 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-layer-1" d="M0,20 C200,120 600,0 1000,90 C1200,120 1400,60 1440,40 L1440,150 L0,150 Z" fill="var(--white)"/>
+            <path class="wave-layer-2" d="M0,50 C300,130 700,10 1100,80 C1300,110 1420,50 1440,60 L1440,150 L0,150 Z" fill="var(--white)"/>
+            <path class="wave-layer-3" d="M0,70 C360,140 1080,30 1440,100 L1440,150 L0,150 Z" fill="var(--white)"/>
         </svg>
     </div>
 
@@ -1437,9 +1458,10 @@
     </section>
 
     <div class="wave-divider" style="background: var(--white);">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path class="wave-back" d="M0,50 C400,120 880,0 1440,60 L1440,120 L0,120 Z" fill="var(--gray-50)"/>
-            <path d="M0,60 C480,120 960,20 1440,70 L1440,120 L0,120 Z" fill="var(--gray-50)"/>
+        <svg viewBox="0 0 1440 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-layer-1" d="M0,60 C350,140 750,10 1100,80 C1300,110 1420,70 1440,50 L1440,150 L0,150 Z" fill="var(--gray-50)"/>
+            <path class="wave-layer-2" d="M0,80 C420,140 850,20 1200,70 C1350,95 1420,60 1440,70 L1440,150 L0,150 Z" fill="var(--gray-50)"/>
+            <path class="wave-layer-3" d="M0,90 C480,140 960,40 1440,85 L1440,150 L0,150 Z" fill="var(--gray-50)"/>
         </svg>
     </div>
 
@@ -1489,9 +1511,10 @@
     </section>
 
     <div class="wave-divider" style="background: var(--gray-50);">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path class="wave-back" d="M0,30 C240,100 640,0 1000,70 C1200,90 1360,50 1440,40 L1440,120 L0,120 Z" fill="var(--primary)"/>
-            <path d="M0,50 C320,110 720,20 1080,80 C1260,100 1380,60 1440,50 L1440,120 L0,120 Z" fill="var(--primary)"/>
+        <svg viewBox="0 0 1440 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-layer-1" d="M0,30 C200,110 550,0 900,80 C1150,120 1350,50 1440,30 L1440,150 L0,150 Z" fill="var(--primary)"/>
+            <path class="wave-layer-2" d="M0,55 C280,120 650,10 1000,75 C1220,100 1380,55 1440,45 L1440,150 L0,150 Z" fill="var(--primary)"/>
+            <path class="wave-layer-3" d="M0,75 C320,130 720,30 1080,90 C1260,115 1380,70 1440,60 L1440,150 L0,150 Z" fill="var(--primary)"/>
         </svg>
     </div>
 
@@ -1529,9 +1552,10 @@
     </section>
 
     <div class="wave-divider" style="background: var(--primary);">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path class="wave-back" d="M0,70 C200,10 660,100 1020,30 C1260,0 1380,40 1440,50 L1440,120 L0,120 Z" fill="var(--gray-50)"/>
-            <path d="M0,80 C240,20 720,100 1080,40 C1300,20 1400,50 1440,60 L1440,120 L0,120 Z" fill="var(--gray-50)"/>
+        <svg viewBox="0 0 1440 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-layer-1" d="M0,80 C180,20 580,120 940,40 C1200,0 1380,50 1440,60 L1440,150 L0,150 Z" fill="var(--gray-50)"/>
+            <path class="wave-layer-2" d="M0,90 C220,30 640,110 980,50 C1220,20 1390,55 1440,65 L1440,150 L0,150 Z" fill="var(--gray-50)"/>
+            <path class="wave-layer-3" d="M0,100 C240,40 720,120 1080,55 C1300,30 1400,60 1440,75 L1440,150 L0,150 Z" fill="var(--gray-50)"/>
         </svg>
     </div>
 
@@ -1552,9 +1576,10 @@
     </section>
 
     <div class="wave-divider" style="background: var(--gray-50);">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path class="wave-back" d="M0,40 C320,100 680,0 1020,70 C1220,100 1360,60 1440,30 L1440,120 L0,120 Z" fill="var(--white)"/>
-            <path d="M0,50 C360,100 720,30 1080,80 C1260,100 1380,70 1440,40 L1440,120 L0,120 Z" fill="var(--white)"/>
+        <svg viewBox="0 0 1440 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-layer-1" d="M0,45 C300,120 650,10 1000,80 C1200,110 1370,60 1440,35 L1440,150 L0,150 Z" fill="var(--white)"/>
+            <path class="wave-layer-2" d="M0,65 C340,120 700,25 1050,80 C1240,105 1380,65 1440,50 L1440,150 L0,150 Z" fill="var(--white)"/>
+            <path class="wave-layer-3" d="M0,80 C360,120 720,40 1080,90 C1260,110 1380,75 1440,60 L1440,150 L0,150 Z" fill="var(--white)"/>
         </svg>
     </div>
 
@@ -1609,9 +1634,10 @@
     </section>
 
     <div class="wave-divider" style="background: var(--white);">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path class="wave-back" d="M0,50 C400,110 900,10 1440,60 L1440,120 L0,120 Z" fill="var(--primary)"/>
-            <path d="M0,60 C480,120 960,30 1440,80 L1440,120 L0,120 Z" fill="var(--primary)"/>
+        <svg viewBox="0 0 1440 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-layer-1" d="M0,55 C380,130 800,10 1200,70 C1350,100 1430,60 1440,45 L1440,150 L0,150 Z" fill="var(--primary)"/>
+            <path class="wave-layer-2" d="M0,70 C420,130 860,25 1220,75 C1360,100 1430,65 1440,60 L1440,150 L0,150 Z" fill="var(--primary)"/>
+            <path class="wave-layer-3" d="M0,85 C480,130 960,45 1440,95 L1440,150 L0,150 Z" fill="var(--primary)"/>
         </svg>
     </div>
 
@@ -1674,6 +1700,30 @@
         }, observerOptions);
 
         fadeElements.forEach(el => observer.observe(el));
+
+        // Parallax effect on wave dividers
+        const waveDividers = document.querySelectorAll('.wave-divider');
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    waveDividers.forEach(wave => {
+                        const rect = wave.getBoundingClientRect();
+                        const viewH = window.innerHeight;
+                        if (rect.top < viewH && rect.bottom > 0) {
+                            const progress = (viewH - rect.top) / (viewH + rect.height);
+                            const offset = (progress - 0.5) * 20;
+                            const layer1 = wave.querySelector('.wave-layer-1');
+                            const layer2 = wave.querySelector('.wave-layer-2');
+                            if (layer1) layer1.style.transform = `translateY(${offset * 0.6}px) translateX(${Math.sin(progress * Math.PI) * 8}px)`;
+                            if (layer2) layer2.style.transform = `translateY(${offset * 0.3}px) translateX(${Math.sin(progress * Math.PI) * -5}px)`;
+                        }
+                    });
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
