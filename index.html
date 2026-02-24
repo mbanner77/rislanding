@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <meta name="description" content="Erleben Sie RIS live auf den DSAG-Technologietagen 2026 in Hamburg. Sichern Sie sich jetzt Ihren persönlichen Gesprächstermin.">
+    <meta name="theme-color" content="#0F2B46">
 
     <!-- Open Graph / Link-Vorschau (og:image MUSS eine absolute URL sein!) -->
     <meta property="og:type" content="website">
@@ -124,6 +125,84 @@
 
         .cursor-glow.active {
             opacity: 1;
+        }
+
+        /* Scroll-Down Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: fadeInUp 1s ease 1.2s both;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+        }
+
+        .scroll-indicator svg {
+            animation: bounceDown 2s ease-in-out infinite;
+            color: rgba(255,255,255,0.4);
+        }
+
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* Dot Grid Pattern */
+        .dot-pattern {
+            position: relative;
+        }
+
+        .dot-pattern::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background-image: radial-gradient(circle, rgba(137, 197, 65, 0.12) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--brand-green), #4a9e2f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Footer Social Icon */
+        .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        /* Prefers Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .particle { display: none; }
+            .scroll-indicator svg { animation: none; }
+            .cursor-glow { display: none; }
         }
 
         /* Navigation */
@@ -1653,6 +1732,10 @@
                 </div>
             </div>
         </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
     </section>
 
     <div class="wave-divider" style="background: var(--primary);">
@@ -1664,10 +1747,10 @@
     </div>
 
     <!-- Problem Section -->
-    <section class="problem" id="problem">
+    <section class="problem dot-pattern" id="problem">
         <div class="problem-inner">
             <span class="section-label">Die Realität</span>
-            <h2>CPI-Alltag: Kennen Sie das?</h2>
+            <h2>CPI-Alltag: <span class="gradient-text">Kennen Sie das?</span></h2>
             <p class="problem-text">
                 SAP CPI ist mächtig – aber die tägliche Arbeit damit oft frustrierend. 
                 Zu viele Klicks, zu wenig Übersicht, zu viel Risiko bei Deployments. 
@@ -1702,11 +1785,11 @@
     </div>
 
     <!-- Solution Section -->
-    <section class="solution" id="loesung">
+    <section class="solution dot-pattern" id="loesung">
         <div class="solution-inner">
             <div class="solution-header">
                 <span class="section-label">Die Lösung</span>
-                <h2>RIS – Fünf Module, ein Ziel:<br>Ihr CPI unter Kontrolle.</h2>
+                <h2>RIS – Fünf Module, ein Ziel:<br><span class="gradient-text">Ihr CPI unter Kontrolle.</span></h2>
                 <p class="solution-sub">
                     Jedes Modul löst ein konkretes Problem. Zusammen machen sie Ihr Integrationsteam schneller, sicherer und effizienter.
                 </p>
@@ -1760,7 +1843,7 @@
         <div class="results-inner">
             <div class="results-header fade-in">
                 <span class="section-label" style="background: var(--brand-green-light); color: var(--brand-green);">Das Ergebnis</span>
-                <h2>Weniger Troubleshooting.<br>Mehr Innovation.</h2>
+                <h2>Weniger Troubleshooting.<br><span class="gradient-text">Mehr Innovation.</span></h2>
                 <p class="results-sub">Was Ihr Team mit RIS konkret gewinnt:</p>
             </div>
             <div class="results-grid fade-in">
@@ -1889,7 +1972,7 @@
                 <a href="https://www.realcore.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
                 <a href="https://www.realcore.de/datenschutz/" target="_blank" rel="noopener noreferrer">Datenschutz</a>
                 <a href="https://www.realcore.de" target="_blank" rel="noopener noreferrer">Website</a>
-                <a href="https://www.linkedin.com/company/realcore-group" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://www.linkedin.com/company/realcore-group" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
             </div>
         </div>
     </footer>
