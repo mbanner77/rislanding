@@ -244,6 +244,83 @@
             box-shadow: 0 5px 20px rgba(137, 197, 65, 0.4);
         }
 
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--primary);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--brand-green);
+        }
+
+        /* Focus Styles for Accessibility */
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+            outline: 2px solid var(--brand-green);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
         /* Hero Section */
         .hero {
             background: var(--gradient-1);
@@ -621,6 +698,7 @@
         .pain-point {
             background: var(--gray-50);
             border: 1px solid var(--gray-200);
+            border-left: 4px solid var(--accent);
             border-radius: 16px;
             padding: 2rem;
             text-align: left;
@@ -631,6 +709,7 @@
             transform: translateY(-4px);
             box-shadow: var(--shadow-md);
             border-color: var(--accent);
+            border-left-color: var(--brand-green);
         }
 
         .pain-point .icon {
@@ -642,6 +721,11 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .pain-point:hover .icon {
+            transform: scale(1.1) rotate(-3deg);
         }
 
         .pain-point h3 {
@@ -736,6 +820,11 @@
             justify-content: center;
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(3deg);
         }
 
         .feature-card h3 {
@@ -822,6 +911,12 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .result-item:hover .icon {
+            transform: scale(1.15) rotate(-5deg);
+            background: rgba(137, 197, 65, 0.2);
         }
 
         .result-item h3 {
@@ -1323,6 +1418,10 @@
                 display: none;
             }
 
+            .hamburger {
+                display: block;
+            }
+
             .nav-cta {
                 padding: 0.55rem 1.2rem;
                 font-size: 0.8rem;
@@ -1490,8 +1589,22 @@
                 <a href="#buecher">Expertise</a>
             </div>
             <a href="#termin" class="nav-cta">Termin sichern →</a>
+            <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#problem">Problem</a>
+        <a href="#loesung">Lösung</a>
+        <a href="#ergebnis">Ergebnis</a>
+        <a href="#buecher">Expertise</a>
+        <a href="#termin" style="color: var(--brand-green); font-weight: 700;">Termin sichern →</a>
+    </div>
 
     <!-- Hero -->
     <section class="hero" id="hero">
@@ -1694,7 +1807,7 @@
                 </p>
             </div>
             <div class="books-image fade-in">
-                <img src="assets/Bücher_alle.png" alt="SAP Press Fachbücher von RealCore" />
+                <img src="assets/Bücher_alle.png" alt="SAP Press Fachbücher von RealCore" loading="lazy" />
             </div>
         </div>
     </section>
@@ -1875,6 +1988,24 @@
             }
         });
 
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
         // Copyright Year
         document.getElementById('copyrightYear').textContent = new Date().getFullYear();
 
@@ -1897,6 +2028,19 @@
         heroSection.addEventListener('mouseleave', () => heroGlow.classList.remove('active'));
         resultsSection.addEventListener('mousemove', (e) => handleGlow(resultsSection, resultsGlow, e));
         resultsSection.addEventListener('mouseleave', () => resultsGlow.classList.remove('active'));
+
+        // Interactive Card Tilt (mouse-follow on feature cards)
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `perspective(600px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-6px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
