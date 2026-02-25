@@ -1526,8 +1526,15 @@
             }
 
             .nav-cta {
-                padding: 0.55rem 1.2rem;
-                font-size: 0.8rem;
+                display: none;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+
+            .dot-pattern::after {
+                display: none;
             }
 
             .hero {
@@ -1545,8 +1552,15 @@
             }
 
             .hero-meta {
-                flex-direction: column;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
                 gap: 1rem;
+            }
+
+            .hero-meta-item {
+                flex: 1;
+                min-width: 90px;
             }
 
             .hero-cta-group {
@@ -1598,6 +1612,12 @@
 
             .books-image {
                 order: -1;
+            }
+
+            .books-image img {
+                max-width: 280px;
+                margin: 0 auto;
+                display: block;
             }
 
             .form-container {
