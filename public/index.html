@@ -2126,5 +2126,120 @@
         });
     </script>
 
+    <!-- Analytics Tracking -->
+    <script>
+    (function() {
+        const SESSION_KEY = 'ris_session';
+        const VISITOR_KEY = 'ris_visitor_id';
+        const PV_KEY = 'ris_pageview_id';
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+        }
+
+        let sessionId = sessionStorage.getItem(SESSION_KEY);
+        if (!sessionId) {
+            sessionId = generateId();
+            sessionStorage.setItem(SESSION_KEY, sessionId);
+        }
+
+        let visitorId = null;
+        let pageviewId = null;
+        let startTime = Date.now();
+        let maxScroll = 0;
+
+        // Track scroll depth
+        window.addEventListener('scroll', () => {
+            const docH = document.documentElement.scrollHeight - window.innerHeight;
+            if (docH > 0) {
+                const depth = Math.round((window.scrollY / docH) * 100);
+                if (depth > maxScroll) maxScroll = depth;
+            }
+        }, { passive: true });
+
+        // Send visit on load
+        async function trackVisit() {
+            try {
+                const res = await fetch('/api/track/visit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sessionId,
+                        screen: { width: screen.width, height: screen.height },
+                        viewport: { width: window.innerWidth, height: window.innerHeight },
+                        language: navigator.language || '',
+                        referrer: document.referrer || '',
+                        landingPage: location.href,
+                        pageTitle: document.title
+                    })
+                });
+                const data = await res.json();
+                visitorId = data.visitorId;
+                pageviewId = data.pageviewId;
+                sessionStorage.setItem(VISITOR_KEY, visitorId);
+                sessionStorage.setItem(PV_KEY, pageviewId);
+            } catch (e) { /* silent */ }
+        }
+
+        // Track clicks on important elements
+        document.addEventListener('click', (e) => {
+            const el = e.target.closest('a, button');
+            if (!el) return;
+            const text = el.textContent.trim().substring(0, 100);
+            const href = el.getAttribute('href') || '';
+            fetch('/api/track/event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    sessionId, visitorId,
+                    eventType: 'click',
+                    eventTarget: text,
+                    eventData: { href, tag: el.tagName },
+                    pageUrl: location.href
+                })
+            }).catch(() => {});
+        });
+
+        // Track section visibility
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    fetch('/api/track/event', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            sessionId, visitorId,
+                            eventType: 'section_view',
+                            eventTarget: entry.target.id || entry.target.className,
+                            eventData: {},
+                            pageUrl: location.href
+                        })
+                    }).catch(() => {});
+                    sectionObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s));
+
+        // Send update before leaving
+        function sendUpdate() {
+            if (!pageviewId) return;
+            const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+            const blob = new Blob([JSON.stringify({
+                pageviewId, timeOnPage, scrollDepth: maxScroll
+            })], { type: 'application/json' });
+            navigator.sendBeacon('/api/track/update', blob);
+        }
+
+        window.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') sendUpdate();
+        });
+        window.addEventListener('beforeunload', sendUpdate);
+
+        trackVisit();
+    })();
+    </script>
+
 </body>
 </html>
