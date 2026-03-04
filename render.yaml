@@ -2,8 +2,13 @@ services:
   - type: web
     runtime: node
     name: ris-landingpage
+    repo: https://github.com/mbanner77/rislanding.git
+    branch: main
+    plan: starter
+    region: frankfurt
     buildCommand: npm install
     startCommand: node server.js
+    healthCheckPath: /
     envVars:
       - key: NODE_ENV
         value: production
