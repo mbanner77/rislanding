@@ -363,6 +363,7 @@
             </select>
             <button class="btn-refresh" onclick="loadDashboard()">↻ Refresh</button>
             <button class="btn-export" onclick="exportCSV()">⬇ CSV Export</button>
+            <button class="btn-refresh" onclick="logout()">🚪 Logout</button>
         </div>
     </div>
 
@@ -530,6 +531,8 @@
                     fetch(`/api/admin/stats?range=${range}`),
                     fetch('/api/admin/live')
                 ]);
+
+                if (statsRes.status === 401) return window.location.href = '/admin/login';
 
                 const stats = await statsRes.json();
                 const live = await liveRes.json();
@@ -813,6 +816,12 @@
         // CSV Export
         function exportCSV() {
             window.open('/api/admin/export', '_blank');
+        }
+
+        // Logout
+        async function logout() {
+            await fetch('/api/admin/logout', { method: 'POST' });
+            window.location.href = '/admin/login';
         }
 
         // Auto refresh every 30s

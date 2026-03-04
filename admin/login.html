@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIS Analytics – Login</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0F2B46;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .login-card h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #0F2B46;
+            margin-bottom: 0.25rem;
+        }
+        .login-card h1 span { color: #89C541; }
+        .login-card p {
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.4rem;
+        }
+        input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input:focus { border-color: #89C541; }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #89C541;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+        button:hover { background: #6ab82e; }
+        button:disabled { opacity: 0.6; cursor: not-allowed; }
+        .error {
+            color: #dc2626;
+            font-size: 0.8rem;
+            margin-top: 0.75rem;
+            text-align: center;
+            display: none;
+        }
+        .icon {
+            text-align: center;
+            margin-bottom: 1.25rem;
+            font-size: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="icon">🔒</div>
+        <h1>RIS <span>Analytics</span></h1>
+        <p>Bitte melde dich an, um das Dashboard zu sehen.</p>
+        <form id="loginForm">
+            <label for="password">Passwort</label>
+            <input type="password" id="password" placeholder="Masterpasswort eingeben" autofocus required>
+            <button type="submit" id="submitBtn">Anmelden</button>
+            <div class="error" id="error">Falsches Passwort. Bitte erneut versuchen.</div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const error = document.getElementById('error');
+            const password = document.getElementById('password').value;
+
+            btn.disabled = true;
+            btn.textContent = 'Prüfe...';
+            error.style.display = 'none';
+
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                if (res.ok) {
+                    window.location.href = '/admin';
+                } else {
+                    error.style.display = 'block';
+                    document.getElementById('password').value = '';
+                    document.getElementById('password').focus();
+                }
+            } catch {
+                error.textContent = 'Verbindungsfehler. Bitte erneut versuchen.';
+                error.style.display = 'block';
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Anmelden';
+        });
+    </script>
+</body>
+</html>

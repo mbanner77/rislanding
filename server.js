@@ -4,8 +4,28 @@ const initSqlJs = require('sql.js');
 const UAParser = require('ua-parser-js');
 const fs = require('fs');
 
+const crypto = require('crypto');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+
+// Simple token store (in-memory, survives until restart)
+const validTokens = new Set();
+
+function generateToken() {
+  return crypto.randomBytes(32).toString('hex');
+}
+
+// Auth middleware for admin routes
+function requireAuth(req, res, next) {
+  const token = req.cookies?.admin_token || req.headers['x-admin-token'];
+  if (token && validTokens.has(token)) return next();
+  if (req.path.startsWith('/api/')) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  return res.redirect('/admin/login');
+}
 
 // Database setup
 const dbPath = process.env.DB_PATH || path.join(__dirname, 'data', 'analytics.db');
@@ -141,8 +161,54 @@ function getLastInsertId() {
 // Middleware
 app.use(express.json({ limit: '1mb' }));
 
+// Cookie parser (simple, no dependency)
+app.use((req, res, next) => {
+  req.cookies = {};
+  const cookieHeader = req.headers.cookie;
+  if (cookieHeader) {
+    cookieHeader.split(';').forEach(c => {
+      const [key, val] = c.trim().split('=');
+      if (key && val) req.cookies[key.trim()] = val.trim();
+    });
+  }
+  next();
+});
+
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+// --- Admin Auth ---
+app.get('/admin/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin', 'login.html'));
+});
+
+app.post('/api/admin/login', (req, res) => {
+  const { password } = req.body;
+  if (password === ADMIN_PASSWORD) {
+    const token = generateToken();
+    validTokens.add(token);
+    res.setHeader('Set-Cookie', `admin_token=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=86400`);
+    return res.json({ ok: true });
+  }
+  res.status(401).json({ error: 'Falsches Passwort' });
+});
+
+app.post('/api/admin/logout', (req, res) => {
+  const token = req.cookies?.admin_token;
+  if (token) validTokens.delete(token);
+  res.setHeader('Set-Cookie', 'admin_token=; Path=/; HttpOnly; Max-Age=0');
+  res.json({ ok: true });
+});
+
+// Protect all admin routes
+app.use('/admin', (req, res, next) => {
+  if (req.path === '/login' || req.path === '/login.html') return next();
+  requireAuth(req, res, next);
+});
+app.use('/api/admin', (req, res, next) => {
+  if (req.path === '/login') return next();
+  requireAuth(req, res, next);
+});
 
 // Bot detection
 function isBot(ua) {
