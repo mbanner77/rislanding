@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSAG 2026 – RIS Live erleben | RealCore</title>
+    <title>RIS Live erleben | RealCore</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F2B46'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='800' font-size='16' fill='%2389C541'%3ER%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <meta name="description" content="Erleben Sie RIS live auf den DSAG-Technologietagen 2026 in Hamburg. Sichern Sie sich jetzt Ihren persönlichen Gesprächstermin.">
+    <meta name="description" content="Erleben Sie RIS live in unserem Online Webinar. Sichern Sie sich jetzt IhreTeilnahme.">
     <meta name="theme-color" content="#0F2B46">
 
     <!-- Open Graph / Link-Vorschau (og:image MUSS eine absolute URL sein!) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rislanding.onrender.com/">
-    <meta property="og:title" content="DSAG 2026 – RIS Live erleben | RealCore">
-    <meta property="og:description" content="Erleben Sie RIS live auf den DSAG-Technologietagen 2026 in Hamburg. Sichern Sie sich jetzt Ihren persönlichen Gesprächstermin.">
+    <meta property="og:title" content="RIS Live erleben | RealCore">
+    <meta property="og:description" content="Erleben Sie RIS live in unserem Online Webinar. Sichern Sie sich jetzt Ihre Teilnahme.">
     <meta property="og:image" content="https://rislanding.onrender.com/assets/og-preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DSAG 2026 – RIS Live erleben | RealCore">
-    <meta name="twitter:description" content="Erleben Sie RIS live auf den DSAG-Technologietagen 2026 in Hamburg. Sichern Sie sich jetzt Ihren persönlichen Gesprächstermin.">
+    <meta name="twitter:title" content="RIS Live erleben | RealCore">
+    <meta name="twitter:description" content="Erleben Sie RIS live in unserem Online Webinar. Sichern Sie sich jetzt Ihre Teilnahme.">
     <meta name="twitter:image" content="https://rislanding.onrender.com/assets/og-preview.png">
 
     <!-- Structured Data (JSON-LD) -->
@@ -31,16 +31,19 @@
     {
         "@context": "https://schema.org",
         "@type": "Event",
-        "name": "RIS Live-Demo auf den DSAG-Technologietagen 2026",
-        "description": "Erleben Sie RIS live am Stand von RealCore. 15-minütige persönliche Demo für SAP Cloud Integration-Teams.",
+        "name": "RIS Live-Demo in unserem Online Webinar",
+   
+        "description": "Erleben Sie RIS live in unserem Online Webinar. 15-minütige persönliche Demo für SAP Cloud Integration-Teams.",
+   
         "startDate": "2026-03-01",
         "endDate": "2026-03-31",
         "location": {
             "@type": "Place",
-            "name": "DSAG-Technologietage 2026",
+            "name": "LIVE Webinar",
+       
             "address": {
                 "@type": "PostalAddress",
-                "addressLocality": "Hamburg",
+                "addressLocality": "Online",
                 "addressCountry": "DE"
             }
         },
@@ -54,7 +57,7 @@
             "price": "0",
             "priceCurrency": "EUR",
             "availability": "https://schema.org/InStock",
-            "url": "https://outlook.office.com/book/Messekalender2026@realcore.de/?ismsaljsauthenabled=true"
+            "url": "https://register.gotowebinar.com/register/1029719482392448095"
         }
     }
     </script>
@@ -578,13 +581,15 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-size: clamp(2.3rem, 5.2vw, 3.8rem);
             font-weight: 800;
             color: var(--white);
-            line-height: 1.15;
+            line-height: 1.12;
             margin-bottom: 1.5rem;
             animation: fadeInUp 0.8s ease 0.2s both;
             text-shadow: 0 2px 30px rgba(0, 0, 0, 0.15);
+            text-wrap: balance;
+            max-width: 22ch;
         }
 
         .hero h1 .highlight {
@@ -1543,7 +1548,9 @@
             }
 
             .hero h1 {
-                font-size: clamp(1.7rem, 6vw, 2.4rem);
+                font-size: clamp(1.9rem, 6.2vw, 2.6rem);
+                line-height: 1.16;
+                max-width: 24ch;
             }
 
             .hero-sub {
@@ -1655,7 +1662,9 @@
             }
 
             .hero h1 {
-                font-size: 1.6rem;
+                font-size: 1.75rem;
+                line-height: 1.18;
+                max-width: none;
             }
 
             .hero-sub {
@@ -1711,7 +1720,7 @@
                 <a href="#ergebnis">Ergebnis</a>
                 <a href="#buecher">Expertise</a>
             </div>
-            <a href="#termin" class="nav-cta">Termin sichern →</a>
+            <a href="#termin" class="nav-cta">AM WEBINAR TEILNEHMEN</a>
             <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
                 <span></span>
                 <span></span>
@@ -1726,7 +1735,7 @@
         <a href="#loesung">Lösung</a>
         <a href="#ergebnis">Ergebnis</a>
         <a href="#buecher">Expertise</a>
-        <a href="#termin" style="color: var(--brand-green); font-weight: 700;">Termin sichern →</a>
+        <a href="#termin" style="color: var(--brand-green); font-weight: 700;">AM WEBINAR TEILNEHMEN</a>
     </div>
 
     <!-- Hero -->
@@ -1746,27 +1755,29 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="dot"></span>
-                    DSAG-Technologietage 2026 · Hamburg
+                    LIVE Webinar
+               
                 </div>
-                <h1>Ihre SAP Cloud Integration verdient<br>bessere <span class="highlight">Werkzeuge.</span></h1>
+                <h1>Ihre SAP Cloud Integration kann mehr - Sie wissen es nur noch nicht</h1>
                 <p class="hero-sub">
-                    Wir haben mit <strong>RIS</strong> eine Lösung entwickelt, die SAP Cloud Integration-Teams das zurückgibt, 
-                    was ihnen am meisten fehlt: Zeit, Übersicht und Kontrolle. Erleben Sie es live am Stand.
+                    Die meisten SAP Cloud Integration-Teams kämpfen mit denselben drei Problemen - und kennen die Ursache nicht.
+                    Wir schon. Besuchen Sie unser Webinar und erleben Sie live, was <strong>RIS</strong> anders macht.
                 </p>
                 <div class="hero-cta-group">
-                    <a href="#termin" class="btn-primary">Gesprächstermin sichern →</a>
+                    <a href="#termin" class="btn-primary">AM WEBINAR TEILNEHMEN</a>
+              
                     <a href="#loesung" class="btn-secondary">Mehr erfahren ↓</a>
                 </div>
                 <div class="hero-meta">
                     <div class="hero-meta-item">
                         <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
-                        <div class="value">Stand 38</div>
-                        <div class="label">Halle H</div>
+                        <div class="value">Online Webinar</div>
+                        <div class="label">Teilnahme</div>
                     </div>
                     <div class="hero-meta-item">
                         <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></div>
                         <div class="value">März 2026</div>
-                        <div class="label">Hamburg</div>
+                        <div class="label">Online</div>
                     </div>
                     <div class="hero-meta-item">
                         <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
@@ -1786,11 +1797,11 @@
     <section class="problem dot-pattern" id="problem">
         <div class="problem-inner">
             <span class="section-label">Die Realität</span>
-            <h2>SAP Cloud Integration-Alltag: <span class="gradient-text">Kennen Sie das?</span></h2>
+            <h2>SAP Cloud Integration im Alltag: <span class="gradient-text">Funktioniert. Aber zu welchem Preis?</span></h2>
             <p class="problem-text">
-                SAP Cloud Integration ist mächtig – aber die tägliche Arbeit damit oft frustrierend. 
-                Zu viele Klicks, zu wenig Übersicht, zu viel Risiko bei Deployments. 
-                Und die Dokumentation? Ist meistens veraltet.
+                SAP Cloud Integration ist mächtig - aber fragen Sie mal Ihr Team, wie sich die tägliche Arbeit damit anfühlt.
+                Zu viele Klicks, zu wenig Übersicht, Deployments auf Risiko.
+                Und die Dokumentation? Die kennt nur einen Zustand...
             </p>
             <div class="pain-points">
                 <div class="pain-point fade-in-stagger">
@@ -1817,9 +1828,9 @@
         <div class="solution-inner">
             <div class="solution-header">
                 <span class="section-label">Die Lösung</span>
-                <h2>RIS – Fünf Module, ein Ziel:<br><span class="gradient-text">Ihre SAP Cloud Integration unter Kontrolle.</span></h2>
+                <h2>Fünf Module. Eine Frage:<br><span class="gradient-text">Warum arbeiten Sie noch ohne RIS?</span></h2>
                 <p class="solution-sub">
-                    Jedes Modul löst ein konkretes Problem. Zusammen machen sie Ihr Integrationsteam schneller, sicherer und effizienter.
+                    Jedes Modul löst ein Problem, das Ihr Team täglich Zeit kostet. Zusammen verändern sie die Art, wie Sie SAP-Integrationen steuern.
                 </p>
             </div>
             <div class="features">
@@ -1863,7 +1874,7 @@
         <div class="results-inner">
             <div class="results-header fade-in">
                 <span class="section-label" style="background: var(--brand-green-light); color: var(--brand-green);">Das Ergebnis</span>
-                <h2>Weniger Troubleshooting.<br><span class="gradient-text">Mehr Innovation.</span></h2>
+                <h2>Weniger Fehler suchen.<br><span class="gradient-text">Mehr Zukunft bauen</span></h2>
                 <p class="results-sub">Was Ihr Team mit RIS konkret gewinnt:</p>
             </div>
             <div class="results-grid fade-in">
@@ -1911,12 +1922,11 @@
     <section class="form-section" id="termin">
         <div class="form-inner">
             <div class="form-content fade-in">
-                <span class="section-label">Jetzt Termin sichern</span>
+                <span class="section-label">AM WEBINAR TEILNEHMEN</span>
                 <h2>15 Minuten, die sich lohnen. Versprochen.</h2>
                 <p>
-                    Erleben Sie RIS live an unserem Stand auf den DSAG-Technologietagen 2026 in Hamburg. 
+                    Erleben Sie RIS live in unserem Online Webinar. 
                     Kein Folienvortrag – wir zeigen Ihnen direkt, wie RIS Ihren SAP Cloud Integration-Alltag verändert. 
-                    Reservieren Sie jetzt Ihren persönlichen Gesprächstermin.
                 </p>
                 <ul class="form-benefits">
                     <li>
@@ -1938,17 +1948,13 @@
                 </ul>
             </div>
             <div class="form-container fade-in" id="formContainer">
-                <h3 class="form-title">Gesprächstermin buchen</h3>
-                <p class="form-subtitle">
-                    Klicken Sie auf den Button – die Buchung erfolgt direkt in unserem Messekalender in einem neuen Tab.
-                </p>
                 <a
                     class="btn-submit"
-                    href="https://outlook.office.com/book/Messekalender2026@realcore.de/?ismsaljsauthenabled=true"
+                    href="https://register.gotowebinar.com/register/1029719482392448095"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Termin jetzt buchen →
+                    AM WEBINAR TEILNEHMEN
                 </a>
                 <p class="form-note">
                     Die Buchungsseite öffnet sich in einem neuen Tab. Bei Fragen: <strong>techhub@realcore.de</strong>.
@@ -1961,7 +1967,7 @@
     <footer class="footer grain">
         <div class="footer-inner">
             <div class="footer-logo">RealCore Group <span>× RIS</span></div>
-            <p>DSAG-Technologietage 2026 · Hamburg · Stand 38, Halle H</p>
+            <p>Online Webinar · Live-Demo · 15 Minuten</p>
             <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--gray-500);">© <span id="copyrightYear"></span> RealCore Group. Alle Rechte vorbehalten.</p>
             <p><a href="mailto:techhub@realcore.de" style="color: var(--gray-300); text-decoration: none;">techhub@realcore.de</a> · <a href="tel:+4920148639980" style="color: var(--gray-300); text-decoration: none;">+49 201 486 399 80</a></p>
             <div class="footer-links">
